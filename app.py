@@ -13,11 +13,8 @@ api = Api(app, errors=errors)
 bcrypt = Bcrypt(app)
 jwt = JWTManager(app)
 
-app.config[
-    'MONGODB_HOST'] = 'MONGODB_HOST'
+app.config['MONGODB_HOST'] = 'mongodb+srv://hilmican:dpmd1930@intern.51qqm.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
 
 initialize_db(app)
 initialize_routes(api)
 
-if __name__ == '__main__':
-    app.run()
