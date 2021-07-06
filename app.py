@@ -13,7 +13,7 @@ api = Api(app, errors=errors)
 bcrypt = Bcrypt(app)
 jwt = JWTManager(app)
 
-app.config['MONGODB_HOST'] = 'mongodb+srv://hilmican:dpmd1930@intern.51qqm.mongodb.net/intern?retryWrites=true&w=majority'
+app.config['MONGODB_HOST'] = 'mongodb+srv://hilmican:dpmd1930@intern.51qqm.mongodb.net/influanceinsta?retryWrites=true&w=majority'
 
 initialize_db(app)
 initialize_routes(api)
