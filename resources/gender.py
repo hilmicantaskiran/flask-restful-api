@@ -8,6 +8,7 @@ from resources.errors import SchemaValidationError, UserNameAlreadyExistsError, 
 
 
 class GendersAgesApi(Resource):
+    @jwt_required()
     def get(self):
         genders = GenderAge.objects().to_json()
         return Response(genders, mimetype="application/json", status=200)
@@ -51,6 +52,7 @@ class GenderAgeApi(Resource):
         except Exception:
             raise InternalServerError
 
+    @jwt_required()
     def get(self, username):
         try:
             gender = GenderAge.objects.get(username=username).to_json()

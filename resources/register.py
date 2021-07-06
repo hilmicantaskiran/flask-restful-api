@@ -8,6 +8,7 @@ from resources.errors import SchemaValidationError, InternalServerError, \
 
 
 class RegisterGetPostApi(Resource):
+    @jwt_required()
     def get(self):
         email = Users.objects().to_json()
         return Response(email, mimetype="application/json", status=200)
@@ -53,6 +54,7 @@ class RegisterApi(Resource):
         except Exception:
             raise InternalServerError
 
+    @jwt_required()
     def get(self, email):
         try:
             user_email = Users.objects.get(email=email).to_json()
