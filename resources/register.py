@@ -17,6 +17,8 @@ class RegisterGetPostApi(Resource):
         try:
             body = request.get_json(force=True)
             email = Users(**body).save()
+            email.hash_password()
+            email.save()
             id = email.id
             return {'id': str(id)}, 200
         except (FieldDoesNotExist, ValidationError):
