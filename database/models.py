@@ -2,8 +2,14 @@ from database.db import db
 from flask_bcrypt import generate_password_hash, check_password_hash
 
 
-class UserName(db.Document):
-    username = db.StringField(required=True, unique=True)
+class Register(db.Document):
+    name = db.StringField(required=True)
+    surname = db.StringField(required=True)
+    email = db.EmailField(required=True, unique=True)
+    password = db.StringField(required=True, min_length=6)
+
+    def hash_password(self):
+        self.password = generate_password_hash(self.password).decode('utf8')
 
 
 class GenderAge(db.Document):
@@ -21,6 +27,3 @@ class User(db.Document):
 
     def check_password(self, password):
         return check_password_hash(self.password, password)
-
-
-User.register_delete_rule(UserName, 'added_by', db.CASCADE)
