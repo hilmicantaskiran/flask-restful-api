@@ -39,19 +39,19 @@ errors = {
         "message": "Request is missing required fields",
         "status": 400
     },
-    "MovieAlreadyExistsError": {
+    "UserNameAlreadyExistsError": {
         "message": "Username with given name already exists",
         "status": 400
     },
-    "UpdatingMovieError": {
+    "UpdatingUserNameError": {
         "message": "Updating username added by other is forbidden",
-        "status": 403
+        "status": 400
     },
-    "DeletingMovieError": {
+    "DeletingUserNameError": {
         "message": "Deleting username added by other is forbidden",
-        "status": 403
+        "status": 400
     },
-    "MovieNotExistsError": {
+    "UserNameNotExistsError": {
         "message": "Username with given id doesn't exists",
         "status": 400
     },
@@ -61,6 +61,6 @@ errors = {
     },
     "UnauthorizedError": {
         "message": "Invalid username or password",
-        "status": 401
+        "status": 400
     }
 }
