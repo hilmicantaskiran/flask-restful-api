@@ -2,7 +2,7 @@ from database.db import db
 from flask_bcrypt import generate_password_hash, check_password_hash
 
 
-class Register(db.Document):
+class Users(db.Document):
     name = db.StringField(required=True)
     surname = db.StringField(required=True)
     email = db.EmailField(required=True, unique=True)
@@ -21,7 +21,7 @@ class GenderAge(db.Document):
     age = db.StringField(required=True)
 
 
-class User(db.Document):
+class Admin(db.Document):
     email = db.EmailField(required=True, unique=True)
     password = db.StringField(required=True, min_length=6)
 

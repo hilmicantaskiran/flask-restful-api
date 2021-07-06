@@ -1,6 +1,6 @@
 from flask import Response, request
 from flask_jwt_extended import jwt_required
-from database.models import Register
+from database.models import Users
 from flask_restful import Resource
 from mongoengine.errors import FieldDoesNotExist, NotUniqueError, DoesNotExist, ValidationError, InvalidQueryError
 from resources.errors import SchemaValidationError, InternalServerError, \
@@ -9,14 +9,14 @@ from resources.errors import SchemaValidationError, InternalServerError, \
 
 class RegisterGetPostApi(Resource):
     def get(self):
-        email = Register.objects().to_json()
+        email = Users.objects().to_json()
         return Response(email, mimetype="application/json", status=200)
 
     @jwt_required()
     def post(self):
         try:
             body = request.get_json(force=True)
-            email = Register(**body).save()
+            email = Users(**body).save()
             id = email.id
             return {'id': str(id)}, 200
         except (FieldDoesNotExist, ValidationError):
@@ -32,7 +32,7 @@ class RegisterApi(Resource):
     def put(self, email):
         try:
             body = request.get_json(force=True)
-            Register.objects.get(email=email).update(**body)
+            Users.objects.get(email=email).update(**body)
             return '', 200
         except InvalidQueryError:
             raise SchemaValidationError
@@ -44,7 +44,7 @@ class RegisterApi(Resource):
     @jwt_required()
     def delete(self, email):
         try:
-            Register.objects.get(email=email).delete()
+            Users.objects.get(email=email).delete()
             return '', 200
         except DoesNotExist:
             raise DeletingUserNameError
@@ -53,7 +53,7 @@ class RegisterApi(Resource):
 
     def get(self, email):
         try:
-            user_email = Register.objects.get(email=email).to_json()
+            user_email = Users.objects.get(email=email).to_json()
             return Response(user_email, mimetype="application/json", status=200)
         except DoesNotExist:
             raise UserNameNotExistsError
