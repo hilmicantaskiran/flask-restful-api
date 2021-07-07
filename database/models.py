@@ -24,6 +24,7 @@ class Users(db.Document):
 class Influencer(db.Document):
     username = db.StringField(required=True, unique=True)
     name = db.StringField(required=True)
+    follower = db.IntField(required=True)
     genderM = db.IntField(required=True)
     genderF = db.IntField(required=True)
     age = db.ListField(required=True)
