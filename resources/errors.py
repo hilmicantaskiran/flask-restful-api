@@ -30,6 +30,10 @@ class UnauthorizedError(Exception):
     pass
 
 
+class EmailUnauthorizedError(Exception):
+    pass
+
+
 errors = {
     "InternalServerError": {
         "message": "Something went wrong",
@@ -61,6 +65,10 @@ errors = {
     },
     "UnauthorizedError": {
         "message": "Invalid username or password",
+        "status": 400
+    },
+    "EmailUnauthorizedError": {
+        "message": "Invalid email or password",
         "status": 400
     }
 }

@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_restful import Api
 from flask_bcrypt import Bcrypt
+from decouple import config
 from flask_jwt_extended import JWTManager
 from database.db import initialize_db
 from resources.routes import initialize_routes
@@ -13,7 +14,7 @@ api = Api(app, errors=errors)
 bcrypt = Bcrypt(app)
 jwt = JWTManager(app)
 
-app.config['MONGODB_HOST'] = 'mongodb+srv://hilmican:dpmd1930@intern.51qqm.mongodb.net/influanceinsta?retryWrites=true&w=majority'
+app.config['MONGODB_HOST'] = config('MONGODB_URI')
 
 initialize_db(app)
 initialize_routes(api)

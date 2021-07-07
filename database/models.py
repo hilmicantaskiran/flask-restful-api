@@ -15,10 +15,12 @@ class Users(db.Document):
         return check_password_hash(self.password, password)
 
 
-class GenderAge(db.Document):
+class Influencer(db.Document):
     username = db.StringField(required=True, unique=True)
-    gender = db.StringField(required=True)
-    age = db.StringField(required=True)
+    name = db.StringField(required=True)
+    genderM = db.IntField(required=True)
+    genderF = db.IntField(required=True)
+    age = db.ListField(required=True)
 
 
 class Admin(db.Document):

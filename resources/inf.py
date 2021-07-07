@@ -1,23 +1,23 @@
 from flask import Response, request
 from flask_jwt_extended import jwt_required
-from database.models import GenderAge
+from database.models import Influencer
 from flask_restful import Resource
 from mongoengine.errors import FieldDoesNotExist, NotUniqueError, DoesNotExist, ValidationError, InvalidQueryError
 from resources.errors import SchemaValidationError, UserNameAlreadyExistsError, InternalServerError, \
     UpdatingUserNameError, DeletingUserNameError, UserNameNotExistsError
 
 
-class GendersAgesApi(Resource):
+class InfluencersApi(Resource):
     @jwt_required()
     def get(self):
-        genders = GenderAge.objects().to_json()
+        genders = Influencer.objects().to_json()
         return Response(genders, mimetype="application/json", status=200)
 
     @jwt_required()
     def post(self):
         try:
             body = request.get_json(force=True)
-            gender = GenderAge(**body).save()
+            gender = Influencer(**body).save()
             id = gender.id
             return {'id': str(id)}, 200
         except (FieldDoesNotExist, ValidationError):
@@ -28,12 +28,12 @@ class GendersAgesApi(Resource):
             raise InternalServerError
 
 
-class GenderAgeApi(Resource):
+class InfluencerApi(Resource):
     @jwt_required()
     def put(self, username):
         try:
             body = request.get_json(force=True)
-            GenderAge.objects.get(username=username).update(**body)
+            Influencer.objects.get(username=username).update(**body)
             return '', 200
         except InvalidQueryError:
             raise SchemaValidationError
@@ -45,7 +45,7 @@ class GenderAgeApi(Resource):
     @jwt_required()
     def delete(self, username):
         try:
-            GenderAge.objects.get(username=username).delete()
+            Influencer.objects.get(username=username).delete()
             return '', 200
         except DoesNotExist:
             raise DeletingUserNameError
@@ -55,7 +55,7 @@ class GenderAgeApi(Resource):
     @jwt_required()
     def get(self, username):
         try:
-            gender = GenderAge.objects.get(username=username).to_json()
+            gender = Influencer.objects.get(username=username).to_json()
             return Response(gender, mimetype="application/json", status=200)
         except DoesNotExist:
             raise UserNameNotExistsError
