@@ -1,7 +1,7 @@
 from flask import Flask
 from flask_restful import Api
 from flask_bcrypt import Bcrypt
-from decouple import config
+from dotenv import dotenv_values
 from flask_jwt_extended import JWTManager
 from database.db import initialize_db
 from resources.routes import initialize_routes
@@ -14,8 +14,8 @@ api = Api(app, errors=errors)
 bcrypt = Bcrypt(app)
 jwt = JWTManager(app)
 
-app.config['MONGODB_HOST'] = config('MONGODB_URI')
-
+URI = dotenv_values(dotenv_path='.env', )["MONGODB_URI"]
+app.config['MONGODB_HOST'] = URI
 initialize_db(app)
 initialize_routes(api)
 
