@@ -17,8 +17,8 @@ class InfluencersApi(Resource):
     def post(self):
         try:
             body = request.get_json(force=True)
-            gender = Influencer(**body).save()
-            id = gender.id
+            inf = Influencer(**body).save()
+            id = inf.id
             return {'id': str(id)}, 200
         except (FieldDoesNotExist, ValidationError):
             raise SchemaValidationError
