@@ -5,7 +5,7 @@ from flask_bcrypt import generate_password_hash, check_password_hash
 class Gender(db.Document):
     username: db.StringField(required=True, unique=True)
     gender: db.StringField(required=True)
-    age: db.IntField(required=True)
+    age: db.StringField(required=True)
 
 
 class Users(db.Document):
