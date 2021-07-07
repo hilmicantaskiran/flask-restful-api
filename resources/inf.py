@@ -10,8 +10,8 @@ from resources.errors import SchemaValidationError, UserNameAlreadyExistsError, 
 class InfluencersApi(Resource):
     @jwt_required()
     def get(self):
-        genders = Influencer.objects().to_json()
-        return Response(genders, mimetype="application/json", status=200)
+        infs = Influencer.objects().to_json()
+        return Response(infs, mimetype="application/json", status=200)
 
     @jwt_required()
     def post(self):
@@ -55,8 +55,8 @@ class InfluencerApi(Resource):
     @jwt_required()
     def get(self, username):
         try:
-            gender = Influencer.objects.get(username=username).to_json()
-            return Response(gender, mimetype="application/json", status=200)
+            inf = Influencer.objects.get(username=username).to_json()
+            return Response(inf, mimetype="application/json", status=200)
         except DoesNotExist:
             raise UserNameNotExistsError
         except Exception:
