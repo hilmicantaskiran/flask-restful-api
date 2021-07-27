@@ -2,15 +2,15 @@ from resources.inf import InfluencersApi, InfluencerApi
 from resources.register import RegisterGetPostApi, RegisterApi
 from resources.auth import SignupApi, LoginApi
 from resources.login import RegisterLoginApi
-from resources.gender import GendersApi, GenderApi
+from resources.infDetail import InfDetailsApi, InfDetailApi
 
 
 def initialize_routes(api):
     api.add_resource(InfluencersApi, '/api/inf')
     api.add_resource(InfluencerApi, '/api/inf/<username>')
 
-    api.add_resource(GendersApi, '/api/gender')
-    api.add_resource(GenderApi, '/api/gender/<username>')
+    api.add_resource(InfDetailsApi, '/api/inf/detail')
+    api.add_resource(InfDetailApi, '/api/inf/detail/<username>')
 
     api.add_resource(RegisterGetPostApi, '/api/user/register')
     api.add_resource(RegisterApi, '/api/user/register/<email>')

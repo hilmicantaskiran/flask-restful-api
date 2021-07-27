@@ -2,12 +2,6 @@ from database.db import db
 from flask_bcrypt import generate_password_hash, check_password_hash
 
 
-class Gender(db.Document):
-    username = db.StringField(required=True, unique=True)
-    gender = db.StringField(required=True)
-    age = db.StringField(required=True)
-
-
 class Users(db.Document):
     name = db.StringField(required=True)
     surname = db.StringField(required=True)
@@ -28,6 +22,11 @@ class Influencer(db.Document):
     genderM = db.IntField(required=True)
     genderF = db.IntField(required=True)
     age = db.ListField(required=True)
+
+
+class InfDetails(db.Document):
+    username = db.StringField(required=True, unique=True)
+    follower = db.ListField(required=True)
 
 
 class Admin(db.Document):

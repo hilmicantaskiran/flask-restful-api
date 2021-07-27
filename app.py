@@ -14,7 +14,7 @@ api = Api(app, errors=errors)
 bcrypt = Bcrypt(app)
 jwt = JWTManager(app)
 
-URI = dotenv_values(dotenv_path='.env', )["MONGODB_URI"]
+URI = dotenv_values(dotenv_path='.env')["MONGODB_URI"]
 app.config['MONGODB_HOST'] = URI
 initialize_db(app)
 initialize_routes(api)
