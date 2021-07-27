@@ -29,6 +29,11 @@ class InfDetails(db.Document):
     follower = db.ListField(required=True)
 
 
+class GenderOfFollower(db.Document):
+    username = db.StringField(required=True, unique=True)
+    gender = db.ListField(required=True)
+
+
 class Admin(db.Document):
     email = db.EmailField(required=True, unique=True)
     password = db.StringField(required=True, min_length=6)
