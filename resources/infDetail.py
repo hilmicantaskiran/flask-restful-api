@@ -10,10 +10,7 @@ from resources.errors import SchemaValidationError, UserNameAlreadyExistsError, 
 class InfDetailsApi(Resource):
     @jwt_required()
     def get(self):
-        res = {
-            "data": InfDetails.objects()
-        }
-        infs = res.to_json()
+        infs = InfDetails.objects().to_json()
         return Response(infs, mimetype="application/json", status=200)
 
     @jwt_required()

@@ -10,10 +10,7 @@ from resources.errors import SchemaValidationError, UserNameAlreadyExistsError, 
 class GenderOfFollowersApi(Resource):
     @jwt_required()
     def get(self):
-        res = {
-            "data": GenderOfFollower.objects()
-        }
-        gender = res.to_json()
+        gender = GenderOfFollower.objects().to_json()
         return Response(gender, mimetype="application/json", status=200)
 
     @jwt_required()
